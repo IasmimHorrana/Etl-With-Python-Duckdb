@@ -31,8 +31,7 @@ def registrar_arquivo(con, nome_arquivo): #Registra um novo arquivo no db com ho
         """,(nome_arquivo, datetime.now()))
         
 def arquivo_processados(con): #Retorna um set com os nomes de todos os arquivos ja processados    
-    return set(row[0] for row in con.execute("SELECT nome_arquivo FROM historico_arquivos").fetchall())
-    
+    return set(row[0] for row in con.execute("SELECT nome_arquivo FROM historico_arquivos").fetchal())
 
         
 def baixar_aquivos_drive(url_pasta, diretorio_local):
@@ -72,7 +71,7 @@ def salvar_no_postgree(df_duckdb, tabela):
 
 #RUN TIME
 
-if __name__ == "__main__":
+def pipeline():
     url_pasta = "https://drive.google.com/drive/folders/1ZEHJwuR5Z4qKVx2JZdh1KMOsMqqDObh6"
     diretorio_local = './pasta_gdown'
     # baixar_aquivos_drive(url_pasta, diretorio_local)
@@ -84,6 +83,7 @@ if __name__ == "__main__":
     inicializar_tabela(con)
     processados = arquivo_processados(con)
 
+logs = []
     for caminho_do_arquivo in lista_de_arquivos:
         nome_arquivo = os.path.basename(caminho_do_arquivo)
         if nome_arquivo not in processados:
@@ -92,6 +92,9 @@ if __name__ == "__main__":
             salvar_no_postgree(df_transformado, "vendas_calculado")
             registrar_arquivo(con, nome_arquivo)
             print(f"Arquivo {nome_arquivo} processado e salvo.")
+            logs.append(f"Arquivo {nome_arquivo} processador e salvo.")
         else:
             print(f"Arquivo {nome_arquivo} já foi processado antes.")
+            logs.append(f"Arquivo {nome_arquivo} já foi processado antes.") 
 
+    return logs 
