@@ -45,6 +45,7 @@ def salvar_no_postgree(df_duckdb, tabela):
     #Salvar o Dataframe no PostgreeSQL
     df_duckdb.to_sql(tabela, con=engine, if_exists = 'append', index=False)
 
+#RUN TIME
 
 if __name__ == "__main__":
     url_pasta = "https://drive.google.com/drive/folders/1ZEHJwuR5Z4qKVx2JZdh1KMOsMqqDObh6"
@@ -52,7 +53,7 @@ if __name__ == "__main__":
     # baixar_aquivos_drive(url_pasta, diretorio_local)
     #arquivos = listar_arquivos_csv(diretorio_local)
     lista_de_arquivos = listar_arquivos_csv(diretorio_local)
-    #ler_csv(arquivos)
+    #ler_csv(arquivos) 
 
     for caminho_do_arquivo in lista_de_arquivos:
         duck_db_df = ler_csv(caminho_do_arquivo)
