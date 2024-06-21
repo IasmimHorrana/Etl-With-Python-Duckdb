@@ -4,6 +4,7 @@ import duckdb
 import pandas as pd
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
+from datetime import datetime
 
 from duckdb import DuckDBPyRelation
 from pandas import DataFrame
@@ -16,12 +17,12 @@ def conectar_banco():
     return duckdb.connect(database='duckdb.db', read_only=False)
 
 def inicializar_tabela(con):
-    con.execute('''
+    con.execute("""
         CREATE TABLE IF NOT EXISTS historico_arquivos (
             nome_arquivo VARCHAR,
             horario_processamento TIMESTAMP
         )
-    ''')
+    """)
 
 def registrar_arquivo(con, nome_arquivo):
      con.execute("""
