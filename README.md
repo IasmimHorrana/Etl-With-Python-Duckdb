@@ -1,6 +1,9 @@
 <h1 align="center">ETL com Python e DuckDB</h1>
 
-![Alt text](img/arquitetura.png)
+<div align="center">
+    <img src="img/arquitetura.png" alt="Fluxograma ETL">
+</div>
+
 
 Estudo de pipeline ETL usando Python e DuckDB do zero ao deploy. Quem estiver interessado pelo conteúdo > [Clique para assistir o workshop aberto do Luciano Galvão.](https://www.youtube.com/watch?v=eXXImkz-vMs)
 
